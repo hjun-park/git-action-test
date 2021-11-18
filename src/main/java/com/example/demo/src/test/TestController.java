@@ -3,6 +3,7 @@ package com.example.demo.src.test;
 import com.example.demo.base.BaseException;
 import com.example.demo.base.BaseResponse;
 import com.example.demo.src.test.model.PostTestReq;
+import com.example.demo.utils.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +19,16 @@ import javax.validation.Valid;
 public class TestController {
 
 	private final TestService testService;
+	private final JwtService jwtService;
+
+	@GetMapping("/")
+	public BaseResponse<String> getSecret() {
+		String s = jwtService.printJwtSecretKey();
+		log.info(s);
+
+		return new BaseResponse<>(s);
+	}
+
 
 	@GetMapping("/test-read")
 	public BaseResponse<String> myTest() {

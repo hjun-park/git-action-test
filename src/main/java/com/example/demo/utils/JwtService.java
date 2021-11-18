@@ -1,11 +1,11 @@
 package com.example.demo.utils;
 
 import com.example.demo.base.BaseException;
-import com.example.demo.config.secret.Secret;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,6 +19,21 @@ import static com.example.demo.base.BaseResponseStatus.INVALID_JWT;
 @Service
 public class JwtService {
 
+	@Value("${secret.JWT_SECRET_KEY}")
+	private String JWT_SECRET_KEY;
+
+	@Value("${secret.USER_INFO_PASSWORD_KEY}")
+	private String USER_INFO_PASSWORD_KEY;
+
+
+	/*
+		for test
+	 */
+	public String printJwtSecretKey() {
+		return JWT_SECRET_KEY;
+	}
+
+
 	/*
 	JWT 생성
 	@param userIdx
@@ -31,7 +46,7 @@ public class JwtService {
 			.claim("userIdx", userIdx)
 			.setIssuedAt(now)
 			.setExpiration(new Date(System.currentTimeMillis() + 1 * (1000 * 60 * 60 * 24 * 365)))
-			.signWith(SignatureAlgorithm.HS256, Secret.JWT_SECRET_KEY)
+			.signWith(SignatureAlgorithm.HS256, JWT_SECRET_KEY)
 			.compact();
 	}
 
@@ -60,7 +75,7 @@ public class JwtService {
 		Jws<Claims> claims;
 		try {
 			claims = Jwts.parser()
-				.setSigningKey(Secret.JWT_SECRET_KEY)
+				.setSigningKey(JWT_SECRET_KEY)
 				.parseClaimsJws(accessToken);
 		} catch (Exception ignored) {
 			throw new BaseException(INVALID_JWT);
@@ -82,7 +97,7 @@ public class JwtService {
 		Jws<Claims> claims;
 		try {
 			claims = Jwts.parser()
-				.setSigningKey(Secret.JWT_SECRET_KEY)
+				.setSigningKey(JWT_SECRET_KEY)
 				.parseClaimsJws(token);
 		} catch (Exception ignored) {
 			throw new BaseException(INVALID_JWT);
