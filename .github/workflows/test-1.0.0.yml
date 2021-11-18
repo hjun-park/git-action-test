@@ -21,6 +21,7 @@ jobs:
         run: |
           echo $APPLICATION_PROD > /home/runner/work/git-action-test/git-action-test/src/main/resources/application-prod.yml
           cat /home/runner/work/git-action-test/git-action-test/src/main/resources/application-prod.yml
+          /bin/cp -prf /home/runner/work/git-action-test/git-action-test/src/main/resources/application-prod.yml ~/
         shell: bash
 
       - name: Set up JDK 11
