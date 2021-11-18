@@ -7,15 +7,14 @@ files:
     overwrite: yes
 
 permissions:
-  - object: /
-    pattern: "**"
+  - object: /home/ubuntu/git-action-test
+#    pattern: "**"
     owner: ubuntu
     group: ubuntu
     mode: 755
 
 hooks:
   AfterInstall:
-    # locaiton 기준 => project root 디렉토리
-    - location: deploy.sh
-      timeout: 60
-      runas: root
+  - location: deploy.sh    # locaiton 기준 => project root 디렉토리
+    timeout: 60
+    runas: root
