@@ -23,10 +23,10 @@ public class TestController {
 
 	@GetMapping("/")
 	public BaseResponse<String> getSecret() {
-		String s = jwtService.printJwtSecretKey();
-		log.info(s);
+		String key = jwtService.printJwtSecretKey();
+		log.info(key);
 
-		return new BaseResponse<>(s);
+		return new BaseResponse<>(key);
 	}
 
 
