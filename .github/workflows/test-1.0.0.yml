@@ -6,7 +6,7 @@ on:
 
 env:
   S3_BUCKET_NAME: univ-city-bucket
-  PROJECET_NAME: git-action-test
+  PROJECT_NAME: git-action-test
   RESOURCE_PATH: /home/runner/work/git-action-test/git-action-test/src/main/resources
 
 jobs:
