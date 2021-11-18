@@ -22,6 +22,8 @@ jobs:
           echo $APPLICATION_PROD > /home/runner/work/git-action-test/git-action-test/src/main/resources/application-prod.yml
           cat /home/runner/work/git-action-test/git-action-test/src/main/resources/application-prod.yml
           ls -l /home/runner/work/git-action-test/git-action-test/src/main/resources
+          cat /home/runner/work/git-action-test/git-action-test/src/main/resources/application-prod.yml | grep url
+          cat /home/runner/work/git-action-test/git-action-test/src/main/resources/application-prod.yml | grep url | wc -l
         shell: bash
 
       - name: Set up JDK 11
