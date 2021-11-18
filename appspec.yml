@@ -11,7 +11,7 @@ permissions:
     group: ubuntu
     mode: 755
 hooks:
-  ApplicationStart:
-  - location: deploy.sh    # locaiton 기준 => project root 디렉토리
+  AfterInstall:
+  - location: /deploy.sh    # locaiton 기준 => project root 디렉토리
     timeout: 60
     runas: root
