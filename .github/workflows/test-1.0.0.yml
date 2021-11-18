@@ -7,6 +7,7 @@ on:
 env:
   S3_BUCKET_NAME: univ-city-bucket
   PROJECET-NAME: git-action-test
+  APPLICATION_PROD: ${{ secrets.APPLICATION_PROD }}
 
 jobs:
   build:
@@ -16,9 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-#      - name: Checkout with yml files
-#        run: /bin/cp -prf
-#        shell: bash
+      - name: Write application-prod
+        run: |
+          echo $APPLICATION_PROD > /home/runner/work/git-action-test/git-action-test/src/main/resources/application-prod.yml
+          cat /home/runner/work/git-action-test/git-action-test/src/main/resources/application-prod.yml
+        shell: bash
 
       - name: Set up JDK 11
         uses: actions/setup-java@v1
